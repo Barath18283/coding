@@ -1,0 +1,18 @@
+<html>
+<head>
+<title> Text formatting </title>
+</head>
+<body>
+<b>Text formatting </b><br>
+<i> Text formatting</i> <br>
+<u> Text formatting </u><br>
+Text <sub> formatting </sub><br>
+Text <sup> formatting </sup><br>
+<big> Text formatting </big><br>
+<small>Text formatting </small><br>
+<tt> Text formatting </tt><br>
+<s> Text formatting </s> <br>
+<font type=”comic sans ms” color=”blue”>
+Text formatting </font>
+</body>
+</html
