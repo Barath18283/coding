@@ -1,0 +1,255 @@
+1. filter the iris dataset to include rows where the species is "setosa" using dplyr package
+ library(dplyr)
+data(iris)
+setosa_df <- iris %>% filter(Species == "setosa")
+head(setosa_df)
+
+2. Calculate the average miles per gallon (mpg) for each cylinder category in the MTCars dataset using dplyr.
+library(dplyr)
+
+data(mtcars)
+
+avg_mpg_by_cyl <- mtcars %>%
+  group_by(cyl) %>%
+  summarize(avg_mpg = mean(mpg))
+
+print(avg_mpg_by_cyl)
+
+3. Create a data frame with the columns "Name", "Age", and "Score" using the tidyr package
+library(tidyr)
+library(tibble)
+
+data <- tibble(
+  Name = c("Alice", "Bob", "Charlie"),
+  Age = c(25, 30, 35),
+  Score = c(90, 85, 95)
+)
+
+print(data)
+
+4. Pivot a data frame from wide format to long format using the gather function in tidyr.
+library(tidyr)
+
+wide_data <- data.frame(
+  Name = c("Alice", "Bob", "Charlie"),
+  Math = c(90, 85, 95),
+  Science = c(85, 80, 90),
+  English = c(88, 89, 85)
+)
+
+print("Wide format data frame:")
+print(wide_data)
+
+long_data <- gather(wide_data, key = "Subject", value = "Score", Math:English)
+
+print("Long format data frame:")
+print(long_data)
+
+5. Read an external CSV file into a data.table and display the first 10 rows.
+install.packages("data.table")
+
+library(data.table)
+
+dt <- fread("your_file.csv")
+
+print(head(dt, 10))
+
+6. Subset rows in the data.table where a specific column value meets a condition.
+library(data.table)
+
+dt <- data.table(Name = c("Alice", "Bob", "Charlie", "David", "Eva"),
+                 Age = c(25, 30, 35, 40, 45),
+                 Score = c(90, 85, 95, 80, 88))
+
+fwrite(dt, "sample_data.csv")
+
+dt <- fread("sample_data.csv")
+
+head(dt)
+
+subset_dt <- dt[Age > 30]
+
+print(head(subset_dt, 10))
+
+7. Create a scatter plot of two variables from an external CSV file using ggplot2.
+library(data.table) 
+library(ggplot2)
+
+data <- fread("data.csv")
+
+ggplot(data, aes(x = Height, y = Weight)) +
+  geom_point() +
+  labs(title = "Scatter Plot of Height vs Weight",
+       x = "Height",
+       y = "Weight")
+
+8. Add a regression line to a scatter plot created with ggplot2.
+library(data.table) 
+library(ggplot2)
+
+data <- fread("your_file.csv")
+
+ggplot(data, aes(x = x_column, y = y_column)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Scatter Plot with Regression Line",
+       x = "x_column",
+       y = "y_column")
+
+9. Load your own dataset into a Pandas DataFrame and display the summary statistics for all numeric columns.
+import pandas as pd
+
+df = pd.read_csv('your_dataset.csv')
+
+df.describe()
+
+10. Handle missing values in your dataset using Pandas.
+import pandas as pd
+
+df = pd.read_csv('your_dataset.csv')
+
+df.isnull().sum()
+
+df.dropna(axis=0)
+df.dropna(axis=1)
+
+11. Create a line plot for two variables from your dataset using Matplotlib.
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('data.csv')
+
+print(df.head())
+
+years = df['Year'] 
+values = df['Value']
+
+plt.figure(figsize=(10, 6))  # Adjust the figure size (width, height)
+plt.plot(years, values, marker='o', linestyle='-', color='b', label='Line Plot')
+plt.title('Line Plot of Year vs Value')
+plt.xlabel('Year')
+plt.ylabel('Value')
+plt.grid(True)
+plt.legend()
+
+plt.tight_layout()  # Ensures all elements fit into the figure area
+plt.show()
+
+12. Customize the title, labels, and legend of a plot created with Matplotlib.
+
+import matplotlib.pyplot as plt
+
+years = [2010, 2011, 2012, 2013, 2014]
+values = [5, 7, 3, 8, 6]
+
+plt.figure(figsize=(10, 6))  # Adjust figure size (width, height)
+
+plt.plot(years, values, marker='o', linestyle='-', color='b', label='Values')
+
+plt.title('Yearly Values')  # Set the title
+plt.xlabel('Year')          # Set label for x-axis
+plt.ylabel('Value')         # Set label for y-axis
+
+plt.grid(True)
+
+plt.legend()
+
+plt.tight_layout()
+
+plt.show()
+
+13. Group your dataset by a specific column and calculate the mean for each group using Pandas.
+import pandas as pd
+
+data = {
+    'Category': ['A', 'A', 'B', 'B', 'A', 'B', 'A'],
+    'Value': [10, 15, 20, 25, 30, 35, 40]
+}
+
+df = pd.DataFrame(data)
+
+mean_values = df.groupby('Category')['Value'].mean().reset_index()
+
+print(mean_values)
+
+14. Merge two DataFrames on a common column using Pandas.
+import pandas as pd
+
+data1 = {
+    'ID': [1, 2, 3, 4],
+    'Name': ['Alice', 'Bob', 'Charlie', 'David']
+}
+
+data2 = {
+    'ID': [1, 2, 3, 5],
+    'Score': [85, 90, 88, 75]
+}
+
+df1 = pd.DataFrame(data1)
+df2 = pd.DataFrame(data2)
+
+merged_df = pd.merge(df1, df2, on='ID', how='inner')
+
+print(merged_df)
+
+15. Generate descriptive statistics for your dataset using Pandas.
+import pandas as pd
+
+df = pd.read_csv('your_dataset.csv')
+
+stats = df.describe()
+
+print(stats)
+
+16. Visualize the distribution of a numeric column using Pandas
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+np.random.seed(0)
+data = {
+    'Values': np.random.normal(loc=50, scale=10, size=100)
+}
+
+df = pd.DataFrame(data)
+plt.figure(figsize=(8, 6))
+sns.boxplot(x=df['Values'])
+plt.title('Box Plot of Values')
+plt.xlabel('Values')
+plt.grid(True)
+plt.show()
+
+17. Filter your own dataset to include only rows where a specific condition is met using Pandas.
+import pandas as pd
+
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Emily'],
+    'Age': [25, 30, 35, 40, 45],
+    'Score': [85, 90, 75, 95, 82]
+}
+
+df = pd.DataFrame(data)
+
+filtered_df = df[df['Score'] > 80]
+
+print(filtered_df)
+
+18. Rename columns in your dataset using Pandas.
+import pandas as pd
+
+# Sample data
+data = {
+    'OldName1': [1, 2, 3, 4, 5],
+    'OldName2': [10, 20, 30, 40, 50],
+}
+df = pd.DataFrame(data)
+# Rename columns using a dictionary
+df = df.rename(columns={
+    'OldName1': 'NewName1',
+    'OldName2': 'NewName2',
+})
+
+df.columns = ['NewName1', 'NewName2']
+
+print(df)
